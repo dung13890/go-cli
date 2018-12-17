@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+    "flag"
 )
 
 var version = "develop"
@@ -16,4 +17,9 @@ const logo = `
 
 func main() {
 	fmt.Println(fmt.Sprintf(logo, version))
+
+    wordPtr := flag.String("word", "foo", "a string")
+    flag.Parse()
+
+    fmt.Println("word:", *wordPtr)
 }
