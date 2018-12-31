@@ -1,5 +1,12 @@
 package cli
 
+import (
+	"flag"
+	"fmt"
+	"log"
+	"os"
+)
+
 type Cli struct {
 	Name     string
 	HelpName string
@@ -36,5 +43,28 @@ func (c *Cli) setUp() {
 }
 
 func (c *Cli) Run() {
-	c.printHelp()
+	flag.Parse()
+
+	if len(flag.Args()) < 1 {
+		panic("shell-provided arguments are not present")
+	}
+
+	subArgs := flag.Args()[1:]
+
+	if len(subArgs) == 0 {
+		c.printHelp()
+		return
+	}
+
+	switch flag.Args()[0] {
+	case "version", "-v":
+		fmt.Println(c.Version)
+	case "help", "-h":
+		c.printHelp()
+		return
+	default:
+		log.Fatalf("\nInvalid Command %s", os.Args[1])
+	}
+
+	return
 }
