@@ -5,7 +5,7 @@ services:
     image: debian
     volumes:
       - ./:/go/src/github.com/dung13890/go-cli
-  app:
+  truck:
     image: dung13890/go-env
     restart: on-failure
     volumes_from:
