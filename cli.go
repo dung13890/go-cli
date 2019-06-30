@@ -46,10 +46,11 @@ func (c *Cli) Run() {
 	flag.Parse()
 
 	if len(flag.Args()) < 1 {
-		panic("shell-provided arguments are not present")
+		c.printHelp()
+		return
 	}
 
-	subArgs := flag.Args()[1:]
+	subArgs := flag.Args()[0:]
 
 	if len(subArgs) == 0 {
 		c.printHelp()
